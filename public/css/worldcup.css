@@ -365,7 +365,7 @@ ul.nav.nav-pills li.active a{
 
 .game .team1-name img,.game .team2-name img{
 	margin:30px;
-	width: 100px;
+	width: 50px;
 }
 
 .game .team2-name{
@@ -398,7 +398,7 @@ ul.nav.nav-pills li.active a{
 	
 	.game .team1-name img,.game .team2-name img{
 		margin:10px;
-		width:60px;
+		width:35px;
 		float: none;
 	}
 		
@@ -556,7 +556,7 @@ ul.nav.nav-pills li.active a{
 }
 
 .group ul li img {
-    width:50px;
+    width:25px;
 }
 
 /************************** Ranking *************************/
@@ -747,7 +747,7 @@ ul.nav.nav-pills li.active a{
 
 .bet .modal-body img{
     display: inline;
-    width: 50px;
+    width: 35px;
 
     margin-top: 5px;
     margin-left: 10px;

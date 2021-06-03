@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'c3kupi',
-			'username'  => 'c3worldcup',
-			'password'  => 'LiZz6Q!r5eL',
+			'host'      => $_ENV['db_host'],
+			'database'  => $_ENV['db_database'],
+			'username'  => $_ENV['db_username'],
+			'password'  => $_ENV['db_password'],
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

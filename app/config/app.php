@@ -98,11 +98,9 @@ return array(
 
     'register_on' => true,
 
-    'app_key' => "fc68cae9-0903-47a2-a83a-a307e0c5142897",
-
-    'pusher_app_id' => "552561",
-    'pusher_app_key' => "507008a7a13e163f1928",
-    'pusher_app_secret' => "aad367260e661dff6282",
+    'pusher_app_id' => $_ENV['pusher_app_id'],
+    'pusher_app_key' => $_ENV['pusher_app_key'],
+    'pusher_app_secret' => $_ENV['pusher_app_secret'],
     'pusher_cluster' => "eu",
 
 
