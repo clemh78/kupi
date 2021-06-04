@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => true,
+	'debug' => false,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -26,9 +26,9 @@ return array(
 	|
 	*/
 
-	'url' => 'https://kupi.fr',
+	'url' => $_ENV['APP_URL'],
 
-    'version' => '1.0.8',
+    'version' => '1.0.9',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -91,16 +91,16 @@ return array(
 	|
 	*/
 
-	'key' => 'EXjzSRsKN98VcbHRNGl265jLJlzhff3J',
+	'key' => $_ENV['APP_KEY'],
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
 
     'register_on' => true,
 
-    'pusher_app_id' => $_ENV['pusher_app_id'],
-    'pusher_app_key' => $_ENV['pusher_app_key'],
-    'pusher_app_secret' => $_ENV['pusher_app_secret'],
+    'pusher_app_id' => $_ENV['PUSHER_APP_ID'],
+    'pusher_app_key' => $_ENV['PUSHER_APP_KEY'],
+    'pusher_app_secret' => $_ENV['PUSHER_APP_SECRET'],
     'pusher_cluster' => "eu",
 
 

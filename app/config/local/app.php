@@ -13,7 +13,5 @@ return array(
 	|
 	*/
 
-	'debug' => true,
-
-	'url' => 'http://kupi.local',
+	'debug' => true
 );

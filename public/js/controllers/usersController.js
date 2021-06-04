@@ -77,7 +77,7 @@ angular.module('usersController', [])
         //TRIE + gestion des ex æquo
         angular.forEach($scope.roomsTmp, function(room, key) {
             if(room != undefined){
-                users = $filter('orderBy')(room.users, ['-winPoints', 'lastname', 'firstname', 'id']);
+                users = $filter('orderBy')(room.users, ['-winPoints', 'display_name', 'id']);
 
                 index = 1;
                 rank = null;
@@ -93,12 +93,12 @@ angular.module('usersController', [])
             }
         });
 
-        $scope.usersSelect = $filter('orderBy')($rootScope.user.rooms[0].users, ['-winPoints', 'lastname', 'firstname', 'id']);
+        $scope.usersSelect = $filter('orderBy')($rootScope.user.rooms[0].users, ['-winPoints', 'display_name', 'id']);
         $scope.selector = $rootScope.user.rooms[0].id;
 
         $scope.select = function(selector, users){
             $scope.selector = selector;
-            $scope.usersSelect = $filter('orderBy')(users, ['-winPoints', 'lastname', 'firstname', 'id']);
+            $scope.usersSelect = $filter('orderBy')(users, ['-winPoints', 'display_name', 'id']);
         };
 
         angular.forEach($scope.roomsTmp, function(room, key) {

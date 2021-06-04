@@ -18,7 +18,7 @@ angular.module('accountsController', [])
         $scope.codeStr = code;
 
         $scope.registerSubmit = function(){
-            User.register($scope.loginStr, $scope.password, $scope.firstnameStr, $scope.lastnameStr, $scope.codeStr, $scope.emailStr)
+            User.register($scope.loginStr, $scope.password, $scope.displayNameStr, $scope.codeStr, $scope.emailStr)
                 .success(function() {
                    $state.transitionTo("login");
                 });

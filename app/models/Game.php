@@ -239,20 +239,23 @@ class Game extends Eloquent {
 
                 $gamme_third = Game::whereRaw('stage_id = ?', array($stage_third))->first();
 
-                //Si équipe 1 a gagné on met l'équipe 2 en 3e place
-                if ($num_game == 1) {
-                    if (($this->stage_game_num % 2) == 1)
-                        $gamme_third->team1_id = $this->team1_id;
-                    else
-                        $gamme_third->team2_id = $this->team1_id;
-                } else {
-                    if (($this->stage_game_num % 2) == 1)
-                        $gamme_third->team1_id = $this->team2_id;
-                    else
-                        $gamme_third->team2_id = $this->team2_id;
-                }
+                //On gère le cas ou il n'y a pas de 3ème place
+                if($gamme_third != null){
+                    //Si équipe 1 a gagné on met l'équipe 2 en 3e place
+                    if ($num_game == 1) {
+                        if (($this->stage_game_num % 2) == 1)
+                            $gamme_third->team1_id = $this->team1_id;
+                        else
+                            $gamme_third->team2_id = $this->team1_id;
+                    } else {
+                        if (($this->stage_game_num % 2) == 1)
+                            $gamme_third->team1_id = $this->team2_id;
+                        else
+                            $gamme_third->team2_id = $this->team2_id;
+                    }
 
-                $gamme_third->save();
+                    $gamme_third->save();
+                }
             }
         }
 

@@ -20,7 +20,7 @@ class live extends Command {
 	 *
 	 * @var string
 	 */
-	protected $description = 'Tache qui permet de récupérer les scores en direct depuis la FIFA.';
+	protected $description = 'Tache qui permet de récupérer les scores en direct.';
 
 	/**
 	 * Create a new command instance.
@@ -31,26 +31,6 @@ class live extends Command {
 	{
 		parent::__construct();
 	}
-
-    //ID compet et saison FIFA
-    private $ID_COMPETITION = 17;
-    private $ID_SEASON = 254645;
-
-    //Renvoi l'ID fifa pour un ID kupi
-    private function getStageId($idStage){
-        if($idStage == null)
-            return 275073;
-        else if($idStage == 5)
-            return 275099;
-        else if($idStage == 4)
-            return 275093;
-        else if($idStage == 3)
-            return 275095;
-        else if($idStage == 2)
-            return 275097;
-        else if($idStage == 1)
-            return 275101;
-    }
 
     /**
 	 * Execute the console command.
@@ -82,27 +62,40 @@ class live extends Command {
                 foreach($games as $value){
                     $oldStatus = $value->status;
 
-                    $response = Unirest\Request::get("https://api.fifa.com/api/v1/live/football/".$this->ID_COMPETITION."/".$this->ID_SEASON."/".$this->getStageId($value->stage_id)."/".$value->fifa_match_id."");
-                    $match = $response->body;
+                    $response = Unirest\Request::get("https://match.uefa.com/v2/matches?matchId=".$value->fifa_match_id."&offset=0&limit=1");
+                    $match = $response->body[0];
 
-                    if($value->team1()->first()->code == $match->HomeTeam->IdCountry && $value->team2()->first()->code == $match->AwayTeam->IdCountry) {
-                        if ($match->MatchStatus == 10 || $match->MatchStatus == 0 || $match->MatchStatus == 3) {
+                    if($value->team1()->first()->code == $match->homeTeam->countryCode && $value->team2()->first()->code == $match->awayTeam->countryCode) {
+                        if ($match->status == "LIVE") {
                             $value->status = "in_progress";
                             //Dans tous les cas : MAJ du score
-                            $value->team1_points = $match->HomeTeam->Score;
-                            $value->team2_points = $match->AwayTeam->Score;
+                            $value->team1_points = $match->score->total->home;
+                            $value->team2_points = $match->score->total->away;
                             if ($value->kick_at_goal == 1) {
-                                $value->team1_kick_at_goal = $match->HomeTeamPenaltyScore;
-                                $value->team2_kick_at_goal = $match->AwayTeamPenaltyScore;
+                                $value->team1_kick_at_goal = $match->score->penalty->home;
+                                $value->team2_kick_at_goal = $match->score->penalty->away;
                             }
-                            $value->time = $match->MatchTime;
-                            if($match->Period == 4)
+                            if(property_exists($match, "minute")) {
+                                $value->time = $match->minute->normal . "'";
+                                if(property_exists($match->minute, "injury"))
+                                    $value->time =  $value->time."+".$match->minute->injury;
+                            }
+
+                            if($match->phase == "HALF_TIME_BREAK")
                                 $value->time = "half-time";
                             $this->info('[' . $date->format('Y-m-d H:i:s') . '] MAJ scores : ' . $value->team1()->first()->name . ' ' . $value->team1_points . '-' . $value->team2_points . ' ' . $value->team2()->first()->name . ' ('.$value->time.').');
                         }
                         //Si match terminé, on fige les infos et on distribue les points
-                        if ($match->MatchStatus == 10 || $match->MatchStatus == 0) {
+                        if ($match->status == "FINISHED") {
                             $value->time = "full-time";
+
+                            $value->team1_points = $match->score->total->home;
+                            $value->team2_points = $match->score->total->away;
+                            if ($value->kick_at_goal == 1) {
+                                $value->team1_kick_at_goal = $match->score->penalty->home;
+                                $value->team2_kick_at_goal = $match->score->penalty->away;
+                            }
+
                             if ($value->team1_points > $value->team2_points) {
                                 $value->setFinished(1);
                                 $this->info('[' . $date->format('Y-m-d H:i:s') . '] Match fini : ' . $value->team1()->first()->name . ' gagnant.');
