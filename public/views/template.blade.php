@@ -51,7 +51,7 @@
 <body @yield('body') >
 
 <div class="guest" ng-hide="isConnected">
-   <img src="/images/WCLogo.png" alt=""/>
+   <img src="/images/UEFA_Euro_2020_logo.png" width="250px" alt=""/>
 </div>
 
 <header ng-show="isConnected">
