@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:5.6-fpm
 
 # Arguments defined in docker-compose.yml
 ARG user
@@ -11,14 +11,18 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
+    libmcrypt-dev \
+    gcc make autoconf libc-dev pkg-config \
     zip \
     unzip
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN docker-php-ext-configure mcrypt
+
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd mcrypt
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
