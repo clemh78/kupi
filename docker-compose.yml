@@ -34,6 +34,9 @@ services:
     image: nginx:alpine
     container_name: kupi-nginx
     restart: unless-stopped
+    labels:
+      - "traefik.http.routers.kupi.rule=Host(`kupi.fr`)"
+      - "traefik.http.routers.kupi.tls=true"
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx:/etc/nginx/conf.d/
