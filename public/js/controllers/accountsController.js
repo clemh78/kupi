@@ -18,10 +18,14 @@ angular.module('accountsController', [])
         $scope.codeStr = code;
 
         $scope.registerSubmit = function(){
-            User.register($scope.loginStr, $scope.password, $scope.displayNameStr, $scope.codeStr, $scope.emailStr)
-                .success(function() {
-                   $state.transitionTo("login");
-                });
+            if($scope.password != $scope.password2){
+                $scope.alerts.push({message: "Les mots de passes doivent être les mêmes", cat: 'error', class: 'danger'});
+            }else{
+                User.register($scope.loginStr, $scope.password, $scope.displayNameStr, $scope.codeStr, $scope.emailStr)
+                    .success(function() {
+                        $state.transitionTo("login");
+                    });
+            }
         }
     }])
 

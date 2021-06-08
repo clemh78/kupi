@@ -38,12 +38,15 @@ class RoomController extends BaseController {
         $room = Room::create($input);
         $room->save();
 
-        $user->rooms()->attach($room->id);
-        $user->save();
+        $userRoom = RoomUser::create(["user_id" => $user->id, "room_id" => $room->id, "display_name" => $user->login]);
+        $userRoom->save();
+
+        $return = $userRoom->toArray();
+        $return['room'] = $room;
 
         return Response::json(
             array('success' => true,
-                'payload' => $room->toArray(),
+                'payload' => $return,
                 'message' => 'Le salon '.$room->name.' a été créé'
             ));
     }

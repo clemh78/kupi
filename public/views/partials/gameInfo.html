@@ -33,11 +33,10 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
+                <ul class="nav nav-pills" ng-show="user.rooms.length > 1">
+                    <li ng-repeat="roomUser in user.rooms" ng-class="{'active' : selector==roomUser}" ><a href="#" ng-click="select(roomUser)" >@@roomUser.room.name@@</a></li>
+                </ul><br />
                 <div ng-hide="bets.length == 0" >
-                    <ul class="nav nav-pills" ng-show="user.rooms.length > 1">
-                        <li ng-repeat="room in user.rooms" ng-class="{'active' : selector==room.id}" ><a href="#" ng-click="select(room.id)" >@@room.name@@</a></li>
-                    </ul><br />
-
                     <div class="userBet" ng-repeat="bet in bets | orderBy : detailedOrderedScore" ng-show="showBet(bet)" >
                         <div class="userScore" >
                             <b>@@ bet.team1_points @@</b> - <b>@@ bet.team2_points @@</b>
@@ -45,8 +44,8 @@
                         <div class="userPoints" ng-show="gameDateIsBeforeNow() && game.status=='completed'" >
                             + @@ bet.win_points @@ XP
                         </div>
-                        <span class="userLogin" ng-class="{'me' : bet.user.id == user.id}" >
-                            @@ bet.user.display_name @@.
+                        <span class="userLogin" ng-class="{'me' : bet.user_id == user.id}" >
+                            @@ callSearch(selector.room.users, bet.user_id).display_name @@
                         </span>
                     </div><br />
                 </div>

@@ -32,7 +32,7 @@ angular.module('services', [])
             },
 
             getRanking : function(token) {
-              return $http.get('/api/users?token=' + token /*+ '&orderby=points&order=DESC'*/);
+              return $http.get('/api/users?token=' + token);
             },
 
             login : function(login, pass) {

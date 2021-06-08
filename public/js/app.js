@@ -70,9 +70,6 @@ worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) 
                 bracket: [ "serviceBracket", "$cookies", function(Bracket, $cookies){
                     return Bracket.GetBracket($cookies['token']);
                 }],
-                users: ["serviceUser", "$cookies", function(User, $cookies){
-                    return User.getRanking($cookies['token']);
-                }],
                 groups: ["serviceGroup", "$cookies", function(Group, $cookies){
                     return Group.getGroups($cookies['token']);
                 }]

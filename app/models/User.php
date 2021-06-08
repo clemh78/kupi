@@ -28,7 +28,7 @@ class User extends Eloquent {
      *
      * @var array
      */
-    protected $fillable = array('login', 'password', 'role_id', 'display_name', 'email');
+    protected $fillable = array('login', 'password', 'role_id', 'email');
 
     /**
      * Table corespondant au champ caché sur les retours JSON
@@ -61,7 +61,6 @@ class User extends Eloquent {
      */
     public static $rules = array(
         'login' => 'required|unique:user|max:255',
-        'display_name' => 'required|max:255',
         'password' => 'required|max:255',
         'email' => 'email|max:255',
         'role_id' => 'exists:role,id'
@@ -73,9 +72,7 @@ class User extends Eloquent {
      * @var array
      */
     public static $rulesUpdate = array(
-        'login' => 'max:255',
         'password' => 'max:255',
-        'display_name' => 'max:255',
         'email' => 'email|max:255',
         'role_id' => 'exists:role,id'
     );
@@ -133,6 +130,6 @@ class User extends Eloquent {
 
     public function rooms()
     {
-        return $this->belongsToMany('Room');
+        return $this->hasMany('RoomUser', 'user_id', 'id');
     }
 }

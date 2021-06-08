@@ -1,10 +1,15 @@
 <div class="login-form">
+        <h1>Créer ton compte</h1>
         <form ng-submit="registerSubmit()" role="form" name="register">
-            <input type="text" ng-model="loginStr" name="login" class="form-control" placeholder="Login">
-            <input type="text" ng-model="displayNameStr" name="display_name" class="form-control" placeholder="Nom d'affichage">
+            <hr/>
+            <input type="text" ng-model="loginStr" name="login" class="form-control" placeholder="Nom d'utilisateur">
             <input type="password" ng-model="password" name="password" class="form-control" placeholder="Mot de passe">
+            <input type="password" ng-model="password2" name="password2" class="form-control" placeholder="Confirmez le mot de passe">
             <input type="email" ng-model="emailStr" name="email" class="form-control" placeholder="Adresse mail (optionnel)">
-            <input type="text" ng-model="codeStr" name="code" class="form-control" size="1" placeholder="Code du salon">
+            <hr/>
+            <h5>Code du salon à rejoindre :</h5>
+            <input type="text" ng-model="codeStr" name="code" class="form-control" size="1" placeholder="Exemple : TEST">
+            <hr/>
             <button class="btn btn-lg btn-primary btn-block" type="submit"  style="background: #c5181f">S'inscrire</button>
         </form>
         <a href="/login" class="btn btn-lg btn-default btn-block" style="background: #444">Retour</a>

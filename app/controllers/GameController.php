@@ -47,10 +47,11 @@ class GameController extends BaseController {
 
         if(new DateTime() > new DateTime(Game::find($id)->date)){
             $user = User::getUserWithToken($_GET['token']);
-            $rooms = $user->rooms;
-            foreach($rooms as $room){
-                foreach($room->users as $user) {
-                    $ids[] = $user->id;
+            $userRooms = $user->rooms;
+
+            foreach($userRooms as $userRoom){
+                foreach($userRoom->room->roomUsers as $roomUser) {
+                    $ids[] = $roomUser->user_id;
                 }
             }
         }

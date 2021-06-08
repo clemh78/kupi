@@ -6,13 +6,7 @@
         <div class="row">
             <div class="form-group">
                 <div class="col-xs-5"><label>Login :</label></div>
-                <div class="col-xs-7"><input type="text" ng-model="userData.login" class="form-control" placeholder="@@ user.login @@"/></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group">
-                <div class="col-xs-5"><label>Nom d'affichage :</label></div>
-                <div class="col-xs-7"><input type="text" ng-model="userData.display_name" class="form-control" placeholder="@@ user.display_name @@"/></div>
+                <div class="col-xs-7"><input disabled type="text" ng-model="userData.login" class="form-control" placeholder="@@ user.login @@"/></div>
             </div>
         </div>
         <div class="row">
@@ -32,6 +26,12 @@
             <div class="form-group">
                 <div class="col-xs-5"><label>Nouveau mot de passe :</label></div>
                 <div class="col-xs-7"><input type="password" ng-model="userData.password" class="form-control"/></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-xs-5"><label>Confirmez le nouveau mot de passe :</label></div>
+                <div class="col-xs-7"><input type="password" ng-model="userData.password2" class="form-control"/></div>
             </div>
         </div>
     </div>

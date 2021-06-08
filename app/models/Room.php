@@ -29,6 +29,7 @@ class Room extends Eloquent {
     {
         $array = parent::toArray();
         $array['nbUsers'] = $this->nbUsers;
+        $array['users'] = $this->users;
         return $array;
     }
 
@@ -49,14 +50,24 @@ class Room extends Eloquent {
         'code' => 'required|unique:room|alpha_num|max:10',
     );
 
-    public function users()
+    public function getUsersAttribute(){
+        $users = [];
+
+        foreach($this->roomUsers()->get() as $roomUser){
+            $users[] = ["id" => $roomUser->user_id, "display_name" => $roomUser->display_name, "winPoints" => $roomUser->user->winPoints];
+        }
+
+        return $users;
+    }
+
+    public function roomUsers()
     {
-        return $this->belongsToMany('User');
+        return $this->hasMany('RoomUser', 'room_id', 'id');
     }
 
     public function getNbUsersAttribute()
     {
-        return count($this->users()->get());
+        return count($this->roomUsers()->get());
     }
 
 }

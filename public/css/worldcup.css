@@ -162,8 +162,21 @@ header{
 }
 
 .login-form {
-    margin: 20px auto;
+    margin: 40px auto;
     max-width:300px;
+}
+
+.login-form h1 {
+    color: white;
+    text-align: center;
+}
+
+.login-form h5 {
+    color: white;
+}
+
+.login-form hr {
+    border-color: #444;
 }
 
 .login-form input {

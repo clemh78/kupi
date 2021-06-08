@@ -6,20 +6,23 @@
             Mes salons</h2>
     </div>
     <div class="modal-body">
-        <div ng-repeat="room in user.rooms">
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//kupi.fr/r/@@room.code@@" target="_blank">
+        <div ng-repeat="roomUser in user.rooms">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//kupi.fr/r/@@roomUser.room.code@@" target="_blank">
                 <img src="images/share-fb.jpg" width="100" style="float:right">
             </a>
-            <h3>@@room.name@@</h3>
+            <h3>@@roomUser.room.name@@</h3>
             <ul class="list-group">
                 <li class="list-group-item">
-                    <b>@@room.nbUsers@@ joueurs</b>
-                    <div class="nbUsers"><i class="fa fa-link"></i> kupi.fr/r/@@room.code@@</div>
+                    <b>@@roomUser.room.nbUsers@@ joueurs</b>
+                    <div class="nbUsers"><i class="fa fa-link"></i> kupi.fr/r/@@roomUser.room.code@@</div>
                 </li>
                 <li class="list-group-item">
                     <span class="hidden-xs">Invitez vos amis avec ce code</span>
                     <span class="hidden-sm hidden-md hidden-lg">Code</span>
-                    <div class="code"><b>@@room.code@@</b></div>
+                    <div class="code"><b>@@roomUser.room.code@@</b></div>
+                </li>
+                <li class="list-group-item">
+                    <i>Les autres utilisateurs de ce salon vous voit en tant que "@@roomUser.display_name@@".</i>
                 </li>
             </ul>
         </div>

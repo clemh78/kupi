@@ -21,9 +21,6 @@ angular.module('usersController', [])
                 controller: 'usersControllerListModalInstance',
                 size: 'lg',
                 resolve: {
-                    users: [ "serviceUser", "$cookies", function(User, $cookies){
-                        return User.getRanking($cookies['token']);
-                    }]
                 }
             });
         };
@@ -54,30 +51,18 @@ angular.module('usersController', [])
 
     }])
 
-    .controller('usersControllerListModalInstance', ["$scope", "$rootScope", "$filter", "serviceUser","$cookies", "$modalInstance", "users", function($scope, $rootScope, $filter, User, $cookies, $modalInstance, users) {
-        $scope.users = users.data;
+    .controller('usersControllerListModalInstance', ["$scope", "$rootScope", "$filter", "serviceUser","$cookies", "$modalInstance", function($scope, $rootScope, $filter, User, $cookies, $modalInstance) {
         $scope.roomsTmp = [];
         $scope.rooms = [];
 
-        angular.forEach($rootScope.user.rooms, function(room, key) {
-            $scope.roomsTmp[room.id] = room;
-            $scope.roomsTmp[room.id].users = [];
-        });
-
-        angular.forEach($scope.users, function(user, key) {
-            angular.forEach(user.rooms, function(room, key) {
-                if(room.id){
-                    if($scope.roomsTmp[room.id] != undefined){
-                        $scope.roomsTmp[room.id].users.push(angular.copy(user));
-                    }
-                }
-            });
+        angular.forEach($rootScope.user.rooms, function(roomUser, key) {
+            $scope.roomsTmp.push(angular.copy(roomUser.room));
         });
 
         //TRIE + gestion des ex æquo
         angular.forEach($scope.roomsTmp, function(room, key) {
             if(room != undefined){
-                users = $filter('orderBy')(room.users, ['-winPoints', 'display_name', 'id']);
+                users = $filter('orderBy')(room.users, ['-winPoints', 'id']);
 
                 index = 1;
                 rank = null;
@@ -93,18 +78,21 @@ angular.module('usersController', [])
             }
         });
 
-        $scope.usersSelect = $filter('orderBy')($rootScope.user.rooms[0].users, ['-winPoints', 'display_name', 'id']);
-        $scope.selector = $rootScope.user.rooms[0].id;
-
-        $scope.select = function(selector, users){
-            $scope.selector = selector;
-            $scope.usersSelect = $filter('orderBy')(users, ['-winPoints', 'display_name', 'id']);
-        };
-
         angular.forEach($scope.roomsTmp, function(room, key) {
             if(room != undefined)
                 $scope.rooms.push(room);
         });
+
+        $scope.select = function(selector){
+            $scope.selector = selector;
+            $scope.usersSelect = $filter('orderBy')(selector.users, ['-winPoints', 'display_name', 'id']);
+        };
+
+        $scope.callSearch = function(users, user_id) {
+            return $filter('filter')(users, { id: user_id }, true)[0];
+        };
+
+        $scope.select($rootScope.user.rooms[0].room);
 
         $scope.showRank = function(index){
             if(index == 0)

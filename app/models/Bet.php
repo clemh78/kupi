@@ -22,13 +22,6 @@ class Bet extends Eloquent {
     protected $table = 'bet';
 
     /**
-     * Tableau indiquant les sous élements à imbriquer
-     *
-     * @var array
-     */
-    protected $with = array('user');
-
-    /**
      * Liste des champs assignable en masse
      *
      * @var array

@@ -24,11 +24,13 @@ class UserController extends BaseController {
     public function index()
     {
         $ids = [];
+
         $user = User::getUserWithToken($_GET['token']);
-        $rooms = $user->rooms;
-        foreach($rooms as $room){
-            foreach($room->users as $user) {
-                $ids[] = $user->id;
+        $userRooms = $user->rooms;
+
+        foreach($userRooms as $userRoom){
+            foreach($userRoom->room->roomUsers as $roomUser) {
+                $ids[] = $roomUser->user_id;
             }
         }
 
@@ -63,7 +65,16 @@ class UserController extends BaseController {
         $input = Input::all();
         $user = User::find($id);
 
-        if(isset($input['password'])){
+        if(isset($input['password']) && isset($input['password2']) ){
+            if($input['password'] != $input['password2']){
+                return Response::json(
+                    array('success' => false,
+                        'payload' => array(),
+                        'error' => "Les mots de passe ne correspondent pas"
+                    ),
+                    400);
+            }
+
             if(Hash::check($input["oldpassword"], $user->password)){
                 $input['password'] = Hash::make($input['password']);
             }else{
@@ -114,6 +125,15 @@ class UserController extends BaseController {
                 400);
 
         $input = Input::all();
+
+        if(!$input['password'])
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Veuillez renseigner un mot de passe !"
+                ),
+                400);
+
         $input['password'] = Hash::make($input['password']);
         $input['role_id'] = 2;
 
@@ -121,7 +141,7 @@ class UserController extends BaseController {
             return Response::json(
                 array('success' => false,
                     'payload' => array(),
-                    'error' => "Veuillez indiquer un salon"
+                    'error' => "Veuillez indiquer le code du salon"
                 ),
                 400);
 
@@ -148,8 +168,8 @@ class UserController extends BaseController {
         $user = User::create($input);
         $user->save();
 
-        $user->rooms()->attach($room->id);
-        $user->save();
+        $userRoom = RoomUser::create(["user_id" => $user->id, "room_id" => $room->id, "display_name" => $user->login]);
+        $userRoom->save();
 
         return Response::json(
             array('success' => true,
@@ -179,7 +199,7 @@ class UserController extends BaseController {
 
         $exist = false;
         foreach($user->rooms()->get() as $roomTest){
-            if($roomTest->id == $room->id)
+            if($roomTest->room_id == $room->id)
                 $exist = true;
         }
 
@@ -191,8 +211,8 @@ class UserController extends BaseController {
                 ),
                 400);
 
-        $user->rooms()->attach($room->id);
-        $user->save();
+        $userRoom = RoomUser::create(["user_id" => $user->id, "room_id" => $room->id, "display_name" => $user->login]);
+        $userRoom->save();
 
         $user = User::getUserWithToken($_GET['token']);
         return Response::json(

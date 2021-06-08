@@ -219,24 +219,28 @@ angular.module('gamesController', [])
     }])
 
 
-    .controller('gamesControllerModalInstance', ["$scope", "$modalInstance", "$cookies", "game", "bets", function ($scope, $modalInstance, $cookies, game, bets) {
+    .controller('gamesControllerModalInstance', ["$scope", "$filter", "$modalInstance", "$cookies", "game", "bets", function ($scope, $filter, $modalInstance, $cookies, game, bets) {
         $scope.game = game;
 
         $scope.teams = [game.team1, game.team2];
 
         $scope.bets = bets.data;
 
-        $scope.selector = $scope.user.rooms[0].id;
+        $scope.selector = $scope.user.rooms[0];
 
-        $scope.select = function(id){
-            $scope.selector = id;
+        $scope.select = function(roomUser){
+            $scope.selector = roomUser;
+        };
+
+        $scope.callSearch = function(users, user_id) {
+            return $filter('filter')(users, { id: user_id }, true)[0];
         };
 
         $scope.showBet = function(bet){
             inRoom = false;
 
-            angular.forEach(bet.user.rooms, function(room, key) {
-                if(room.id == $scope.selector)
+            angular.forEach($scope.selector.room.users, function(user, key) {
+                if(user.id == bet.user_id)
                     inRoom = true;
             });
 
