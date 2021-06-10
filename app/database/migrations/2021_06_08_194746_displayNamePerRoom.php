@@ -27,6 +27,9 @@ class DisplayNamePerRoom extends Migration {
             $item->save();
         }
 
+        //Modification table room
+        DB::statement('ALTER TABLE `room_user` MODIFY `display_name` VARCHAR(255) NOT NULL;');
+
         //Modification table user
         Schema::table('user', function($table)
         {

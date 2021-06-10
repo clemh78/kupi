@@ -51,4 +51,37 @@ class RoomController extends BaseController {
             ));
     }
 
+    public function updateDisplayName($id){
+        $user = User::getUserWithToken($_GET['token']);
+        $roomUser = RoomUser::whereRaw('user_id = ? && room_id = ?', array($user->id, $id))->first();
+
+        if(!$roomUser){
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'message' => 'Vous n\'êtes pas dans ce salon !'
+                ));
+        }
+
+        $input = Input::all();
+
+        if(isset($input['display_name']) && $input['display_name'] != ""){
+            $roomUser->display_name = $input['display_name'];
+            $roomUser->save();
+
+            return Response::json(
+                array('success' => true,
+                    'payload' => $roomUser,
+                    'message' => 'Vous avez modifié votre nom dans le salon '.$roomUser->room->name
+                ));
+        }else{
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'message' => 'Vous devez renseigner un nom d\'affichage !'
+                ));
+        }
+
+    }
+
 }

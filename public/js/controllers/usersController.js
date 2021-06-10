@@ -62,7 +62,7 @@ angular.module('usersController', [])
         //TRIE + gestion des ex æquo
         angular.forEach($scope.roomsTmp, function(room, key) {
             if(room != undefined){
-                users = $filter('orderBy')(room.users, ['-winPoints', 'id']);
+                users = $filter('orderBy')(room.users, ['-winPoints', 'display_name', 'id']);
 
                 index = 1;
                 rank = null;
@@ -92,8 +92,6 @@ angular.module('usersController', [])
             return $filter('filter')(users, { id: user_id }, true)[0];
         };
 
-        $scope.select($rootScope.user.rooms[0].room);
-
         $scope.showRank = function(index){
             if(index == 0)
                 return true;
@@ -101,6 +99,8 @@ angular.module('usersController', [])
                 return true;
             return false;
         }
+
+        $scope.select($scope.rooms[0]);
     }])
 
     .controller('usersControllerAccountModalInstance', ["$scope", "$rootScope", "$modalInstance", "$cookies", "serviceUser", "user", function($scope, $rootScope, $modalInstance, $cookies, User, user) {
@@ -123,6 +123,7 @@ angular.module('usersController', [])
 
     .controller('usersControllerRoomModalInstance', ["$scope", "$rootScope", "$modalInstance", "$cookies", "serviceUser", "user", "serviceRoom", function($scope, $rootScope, $modalInstance, $cookies, User, user, Room) {
         $scope.user = user;
+        $scope.editedRoomName = [];
 
         $scope.addRoom = function(){
             User.join($cookies['token'], $scope.roomCode)
@@ -142,4 +143,23 @@ angular.module('usersController', [])
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
+
+        $scope.updateDisplayName = function (){
+            Room.updateDisplayName($cookies['token'], $scope.editedRoom, $scope.editedRoomName[$scope.editedRoom])
+                .success(function(data){
+                    $scope.editedRoomRaw.display_name = $scope.editedRoomName[$scope.editedRoom];
+                    $scope.editedRoom = undefined;
+                });
+        }
+
+        $scope.editDisplayName = function (room){
+            if(room == undefined){
+                $scope.editedRoom = undefined;
+                $scope.editedRoomRaw = undefined;
+            }else{
+                $scope.editedRoomRaw = room;
+                $scope.editedRoom = room.room.id;
+                $scope.editedRoomName[room.room.id] = angular.copy(room.display_name);
+            }
+        }
     }]);

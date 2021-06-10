@@ -10,7 +10,9 @@
             <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//kupi.fr/r/@@roomUser.room.code@@" target="_blank">
                 <img src="images/share-fb.jpg" width="100" style="float:right">
             </a>
-            <h3>@@roomUser.room.name@@</h3>
+            <h3>
+                @@roomUser.room.name@@
+            </h3>
             <ul class="list-group">
                 <li class="list-group-item">
                     <b>@@roomUser.room.nbUsers@@ joueurs</b>
@@ -21,8 +23,20 @@
                     <span class="hidden-sm hidden-md hidden-lg">Code</span>
                     <div class="code"><b>@@roomUser.room.code@@</b></div>
                 </li>
-                <li class="list-group-item">
-                    <i>Les autres utilisateurs de ce salon vous voit en tant que "@@roomUser.display_name@@".</i>
+                <li class="list-group-item" style="height: 60px;">
+                    <div id="display_name_see_@@roomUser.id@@" class="display_name_see" ng-hide="editedRoom == roomUser.room.id" >
+                        <div style="padding-top: 10px;float: left;" >
+                            <i>Les autres utilisateurs de ce salon vous voit en tant que "@@roomUser.display_name@@".</i>
+                        </div>
+                        <button style="float: right;cursor: pointer;" class="btn btn-default" ng-click="editDisplayName(roomUser)" >Modifier</button>
+                    </div>
+                    <div id="display_name_edit_@@roomUser.id@@" class="display_name_edit" ng-hide="editedRoom != roomUser.room.id" >
+                        <div style="float: left;" >
+                            <input type="text" ng-model="editedRoomName[roomUser.room.id]" class="form-control" />
+                        </div>
+                        <button style="float: right;cursor: pointer;margin-left: 10px;" class="btn btn-danger" ng-click="editDisplayName(undefined)" >Annuler</button>
+                        <button style="float: right;cursor: pointer;" class="btn btn-success" ng-click="updateDisplayName()" >Valider</button>
+                    </div>
                 </li>
             </ul>
         </div>

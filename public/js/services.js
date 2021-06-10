@@ -155,6 +155,14 @@ angular.module('services', [])
                     data: $.param({"name" : name, "code" : code})
                 });
             },
+            updateDisplayName : function(token, id, display_name) {
+                return $http({
+                    method: 'POST',
+                    url: 'api/rooms/'+id+'/user?token=' + token,
+                    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                    data: $.param({"display_name" : display_name})
+                });
+            },
         }
     })
 
