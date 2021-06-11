@@ -163,6 +163,13 @@ angular.module('services', [])
                     data: $.param({"display_name" : display_name})
                 });
             },
+            leave : function(token, id) {
+                return $http({
+                    method: 'DELETE',
+                    url: 'api/rooms/'+id+'/user?token=' + token,
+                    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                });
+            },
         }
     })
 

@@ -51,11 +51,11 @@
 <body @yield('body') >
 
 <div class="guest" ng-hide="isConnected">
-   <img src="/images/UEFA_Euro_2020_logo.png" width="250px" alt=""/>
+   <img src="/images/UEFA_Euro_2020_logo.png" width="220px" alt=""/>
 </div>
 
 <header ng-show="isConnected">
-    <div class="navbar navbar-inverse" role="navigation" >
+    <div class="navbar navbar-inverse container" role="navigation" >
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
                 <img src="/images/KUPILogo.png"/><br/>

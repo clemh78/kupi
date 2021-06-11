@@ -10,7 +10,7 @@
                     <img width="50px" src="images/flags/@@ game.team1.code.toUpperCase() @@.webp"/>
                     <div ng-show="game.winner_id == game.team1.id" class="winnerFlag one" ><i class="fa fa-check"></i></div>
                 </div>
-                <div class="col-xs-4 bet-input-form dash">
+                <div class="col-xs-4 bet-input-form dash" >
                     <h2><span ng-show="game.team1_kick_at_goal" >(@@ game.team1_kick_at_goal @@)</span> @@ game.team1_points @@</h2>
                     <h2>-</h2>
                     <h2>@@ game.team2_points @@ <span ng-show="game.team2_kick_at_goal" >(@@ game.team2_kick_at_goal @@)</span></h2>
@@ -33,9 +33,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <ul class="nav nav-pills" ng-show="user.rooms.length > 1">
-                    <li ng-repeat="roomUser in user.rooms" ng-class="{'active' : selector==roomUser}" ><a href="#" ng-click="select(roomUser)" >@@roomUser.room.name@@</a></li>
-                </ul><br />
+                <select style="margin-bottom: 20px;" ng-show="user.rooms.length > 1" class="form-control select-room" ng-model="selector" ng-options="room as room.room.name for room in user.rooms"></select>
                 <div ng-hide="bets.length == 0" >
                     <div class="userBet" ng-repeat="bet in bets | orderBy : detailedOrderedScore" ng-show="showBet(bet)" >
                         <div class="userScore" >

@@ -59,9 +59,10 @@ header{
     left: 0;
     height: 400px;
     width: 100%;
-    border-bottom: 2px solid #333;
+    border-bottom: 2px solid #009bb4;
     z-index: -1;
-    background: #0057b8 url(../images/fwc_darkbluebg.png);
+    background: #009bb4 url(../images/body-bg.webp);
+    background-size: cover;
 }
 
 .navbar-inverse{
@@ -157,8 +158,8 @@ header{
 }
 
 .logo-kupi-login{
-    width: 226px;
-    margin-left:36px;
+    width: 150px;
+    margin-left:70px;
 }
 
 .login-form {
@@ -184,9 +185,9 @@ header{
 }
 
 .login-form button, .login-form a{
-    color: white;
     border-radius: 0;
-    background-color: #0057b8;
+    background: #009bb4 url(../images/body-bg.webp);
+    background-size: cover;
     border: none;
     margin-top: 20px;
     color: #fff;
@@ -204,7 +205,7 @@ header{
 }
 
 .login-form input:focus{
-    border-color: #0057b8;
+    border-color: #009bb4;
     z-index: -2;
 }
 
@@ -290,18 +291,18 @@ ul.nav.nav-pills li:not(:first-child){
 }
 
 ul.nav.nav-pills li a{
-    color: #333;
-    background-color: #fff;
+    color: #fff;
+    background-color: #333;
     border-radius: 50px;
 }
 
 ul.nav.nav-pills li a:hover{
-    background-color: #47a447;
+    background-color: #F7A600;
     color: #fff;
 }
 
 ul.nav.nav-pills li.active a{
-    background-color: #47a447;
+    background-color: #F7A600;
     color: #fff;
 }
 
@@ -317,8 +318,8 @@ ul.nav.nav-pills li.active a{
 
 .my-points .btn-default{
     margin-top: 2px;
-    background-color: #c5181f;
-    border-color: #c5181f;
+    background-color: #874276;
+    border-color: #874276;
     border-radius: 50px;
     color: #fff;
     padding: 10px 15px;
@@ -326,14 +327,14 @@ ul.nav.nav-pills li.active a{
 
 
 .game-header{
-    background-color: #c5181f;
+    background-color: #874276;
     color: #fff;
     height: 80px;
     padding: 5px 30px;
 }
 
 .game-previous-header {
-    background-color: #0057b8;
+    background-color: #009bb4;
     color: #fff;
     height: 80px;
     padding: 5px 30px;
@@ -346,17 +347,18 @@ ul.nav.nav-pills li.active a{
     margin-bottom: -13px;
 }
 
-
-.game{
-    border-top: 1px solid #eee;
-}
-
 .game:first-child{
     border-top: none;
 }
 
-.game.inprogress {
-    background: #0057b8 url(../images/fwc_darkbg.jpg);
+.game-content {
+    margin: 10px;
+    border-radius: 10px;
+    background-color: rgb(245, 245, 245);
+}
+
+.game.inprogress .game-content {
+    background: #009bb4 url(../images/body-bg-dark.webp);
     color: white;
     border-color: #777777;
 }
@@ -490,7 +492,7 @@ ul.nav.nav-pills li.active a{
 }
 
 .game button.btn.btn-success{
-    background-color: #47a447;
+    background-color: #009bb4;
 }
 
 .game .col-xs-6 img{
@@ -535,7 +537,7 @@ ul.nav.nav-pills li.active a{
 /************************** Group *************************/
 
 .group .subheader {
-    background-color: #0057b8;
+    background-color: #009bb4;
     color: #fff;
     height: 60px;
     padding: 16px 30px;
@@ -558,7 +560,7 @@ ul.nav.nav-pills li.active a{
 
 .group ul li .points {
     float:right;
-    background-color: #c5181f;
+    background-color: #874276;
     color: white;
     padding: 5px;
     padding-left: 10px;
@@ -576,14 +578,14 @@ ul.nav.nav-pills li.active a{
 
 
 .users .modal-header{
-    background-color: #c5181f;
+    background-color: #874276;
     color:#fff;
-    border-bottom: 1px solid #5f0c0f;
+    border-bottom: 1px solid #723864FF;
 }
 
 .users .modal-body {
-    background-color: #0057b8;
-    background-image: url(../images/fwc_darkbluebg.png);
+    background-color: #009bb4;
+    background-image: url(../images/body-bg-dark.webp);
     color: white;
 }
 
@@ -592,8 +594,8 @@ ul.nav.nav-pills li.active a{
 }
 
 .users .modal-body .alert-info {
-    background-color: #47a447;
-    border-color: #47a447;
+    background-color: #009bb4;
+    border-color: #009bb4;
     color: white;
 }
 
@@ -603,7 +605,7 @@ ul.nav.nav-pills li.active a{
 
 .users .modal-body .user .position {
     font-size: 20px;
-    background-color: #c5181f;
+    background-color: #009bb4;
     color: white;
     padding: 5px;
     padding-left: 10px;
@@ -627,12 +629,12 @@ ul.nav.nav-pills li.active a{
 }
 
 .users .modal-body .user .login.me {
-    background-color: #c5181f;
+    background-color: #F7A600;
 }
 
 .users .modal-body .user .points {
     float: right;
-    background-color: #47a447;
+    background-color: #009bb4;
     padding: 10px;
     border-radius: 50px;
     color: white;
@@ -681,19 +683,21 @@ ul.nav.nav-pills li.active a{
 .g_game { position: relative; margin-bottom: 15px; box-shadow: 3px 4px 0px #ddd; border: 1px solid #fff; border-top: 0; border-left: 0; }
 .g_gracket h3 { min-width: 180px; margin: 0; padding: 10px 8px 8px; font-size: 15px!important; font-weight: normal; color: white; font-size: 20px; text-shadow: 1px 1px 1px #333;} /* @note: this width determinds node size */
 .g_team {
-    background: #0057b8 url(../images/fwc_darkbluebg.png);
+    background: #333;
 }
 .g_team h3 small{font-size: 100%;color: #fff;float: right;font-weight: bold;margin-right: 10px;margin-top: 0px;}
-.g_round_label { top: -5px; font-weight: normal; color: #0057b8; text-align: center; font-size: 18px;
+.g_round_label { top: -5px; font-weight: normal; color: #874276; text-align: center; font-size: 18px;
     font-family: 'El Messiri', sans-serif;
     text-transform: uppercase;
     font-weight: bold;
 }
 .g_team:last-child {  /*background: #FCB821;*/ border-top: 1px solid white; }
 .g_round:last-child { margin-right: 20px; }
-.g_winner { background: #47a447; }
+.g_winner {
+    background: #009bb4 url(../images/body-bg.webp);
+    background-size: cover; }
 .g_winner .g_team { background: none; }
-.g_current { cursor: pointer; background: #47a447!important; }
+.g_current { cursor: pointer; background: #874276!important; }
 .g_current small { color: white; }
 .g_current h3 { color: white; }
 /*
@@ -702,7 +706,7 @@ ul.nav.nav-pills li.active a{
 /* secondary-bracket */
 .container-secondary { position: relative; overflow: hidden; }
 .secondary-bracket { bottom: 50px; left: 690px; position: absolute; width: 450px; }
-#bracket h4 { color: #0057b8; left: 0; margin: 0; padding: 0; position: absolute; bottom: 60px; z-index: 9999;
+#bracket h4 { color: #874276; left: 0; margin: 0; padding: 0; position: absolute; bottom: 60px; z-index: 9999;
     font-family: 'El Messiri', sans-serif;
     text-transform: uppercase;
     font-weight: bold;
@@ -714,19 +718,20 @@ ul.nav.nav-pills li.active a{
 /************************** Bets **************************/
 
 .bet .modal-body {
-    background-color: #0057b8;
-    background-image: url(../images/fwc_darkbg.jpg);
+    background-color: #009bb4;
+    background-image: url(../images/body-bg-dark.webp);
     color: white;
 }
 
 .bet .modal-header{
-    background-color: #0057b8;
+    background: #009bb4 url(../images/body-bg.webp);
+    background-size: cover;
     color:#fff;
     border-bottom: 1px solid #002e6b;
 }
 
 .bet .modal-footer{
-    background-color: #0057b8;
+    background-color: #009bb4;
     color:#fff;
     border-bottom: 1px solid #002e6b;
     margin-top: 0px;
@@ -786,7 +791,7 @@ ul.nav.nav-pills li.active a{
 .bet .modal-body input[type="text"]{
     border-radius: 2px;
     background-color: #313840;
-    border: 1px solid #0057b8;
+    border: 1px solid #009bb4;
     color: white;
 }
 
@@ -794,8 +799,9 @@ ul.nav.nav-pills li.active a{
     width: 45px;
     height: 37px;
     display: inline;
-    margin: 6px 0px;
+    margin: 15px 0px;
 }
+
 
 .bet .modal-body input[type="text"].team.one{
     float: left;
@@ -823,17 +829,16 @@ ul.nav.nav-pills li.active a{
 }
 
 .bet button.btn-primary{
-    background-color: #0057b8;
+    background-color: #009bb4;
     border-color: #002e6b;
 }
 
 .bet button.btn-warning{
-    background-color: #f0ad4e;
+    background-color: #F7A600;
 }
 
 .bet .dash{
     text-align: center;
-    margin: 12px 0px;
 }
 
 .game .tLogo50 {
@@ -889,7 +894,7 @@ ul.nav.nav-pills li.active a{
 
 .bet .userBet .userScore {
     font-size: 20px;
-    background-color: #c5181f;
+    background-color: #009bb4;
     color: white;
     padding: 5px 10px;
     display: inline-block;
@@ -898,14 +903,14 @@ ul.nav.nav-pills li.active a{
 }
 
 .bet .userBet .userLogin.me {
-    background-color: #c5181f;
+    background-color: #F7A600;
     padding-left:10px;
     padding-right:10px;
 }
 
 .bet .userBet .userPoints {
     float: right;
-    background-color: #47a447;
+    background-color: #009bb4;
     padding: 5px;
     border-radius: 50px;
     color: white;
@@ -925,7 +930,7 @@ ul.nav.nav-pills li.active a{
 }
 
 .bet .winnerFlag {
-    color:#47a447;
+    color:#F7A600;
     font-size: 25px;
 }
 
@@ -944,14 +949,14 @@ ul.nav.nav-pills li.active a{
 }
 
 .bbt {
-    background: #0057b8 url(../images/fwc_darkbluebg.png);
+    background: #009bb4 url(../images/body-bg.webp);
     color: white;
     padding: 10px;
     height: 65px;
 }
 
 .bbt:not(:last-child) {
-    border-bottom: 2px solid #47a447;
+    border-bottom: 2px solid #874276;
 }
 
 .bbt h2 {
@@ -969,8 +974,8 @@ ul.nav.nav-pills li.active a{
 }
 
 .bbt select {
-    background-color: #47a447;
-    border-color: #47a447;
+    background-color: #874276;
+    border-color: #874276;
     color: white;
     width: 150px;
     float: right;
@@ -978,15 +983,15 @@ ul.nav.nav-pills li.active a{
 }
 
 .bbt select[disabled] {
-    background-color: #3c763d;
-    border-color: #3c763d;
+    background-color: #723864FF;
+    border-color: #723864FF;
     color: white;
 }
 
 /***************************** ROOM ******************************/
 
 .room .nbUsers{
-    background-color: #0057b8;
+    background-color: #009bb4;
     color:white;
     float: right;
     padding: 10px;
@@ -997,7 +1002,7 @@ ul.nav.nav-pills li.active a{
 }
 
 .room .code{
-    background-color: #f0ad4e;
+    background-color: #F7A600;
     color:white;
     float: right;
     padding: 10px;
@@ -1012,8 +1017,8 @@ ul.nav.nav-pills li.active a{
 }
 
 .room .modal-body {
-    background: #0057b8 url(../images/fwc_darkbg.jpg);
-    color: white;
+    background: #E9E9E7;
+    color: #000;
 }
 
 .room .modal-body h3 {
@@ -1023,7 +1028,8 @@ ul.nav.nav-pills li.active a{
 }
 
 .room .modal-header{
-    background-color: #0057b8;
+    background: #009bb4 url(../images/body-bg.webp);
+    background-size: cover;
     color:#fff;
     border-bottom: 1px solid #002e6b;
 }
@@ -1033,24 +1039,32 @@ ul.nav.nav-pills li.active a{
 }
 
 .room .list-group-item{
-    background-color: #666;
-    border: 1px solid #777777;
+    background-color: #fff;
+    border: 1px solid #E9E9E7;
 }
 
 .room input{
-    background-color:#ccc;
+    background-color:#fff;
 }
 .room input, .room button{
     margin-top:2px;
 }
 
+.select-room {
+    width: 200px;
+    height: 40px;
+    background-color: #333;
+    color: white;
+}
+
 .help .modal-body {
-    background: #0057b8 url(../images/fwc_darkbg.jpg);
+    background: #009bb4 url(../images/body-bg-dark.webp);
     color: white;
 }
 
 .help .modal-header{
-    background-color: #0057b8;
+    background: #009bb4 url(../images/body-bg.webp);
+    background-size: cover;
     color:#fff;
     border-bottom: 1px solid #002e6b;
 }
@@ -1074,7 +1088,7 @@ ul.nav.nav-pills li.active a{
 
 .alert-info {
     color: #fff;
-    background-color: #0092FF;
+    background-color: #009bb4;
     border: none;
 }
 
@@ -1101,4 +1115,8 @@ ul.nav.nav-pills li.active a{
 }
 
 .display_name_edit {
+}
+
+.label-primary {
+    background-color: #009bb4;
 }

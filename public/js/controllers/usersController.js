@@ -83,9 +83,8 @@ angular.module('usersController', [])
                 $scope.rooms.push(room);
         });
 
-        $scope.select = function(selector){
-            $scope.selector = selector;
-            $scope.usersSelect = $filter('orderBy')(selector.users, ['-winPoints', 'display_name', 'id']);
+        $scope.select = function(){
+            $scope.usersSelect = $filter('orderBy')($scope.selector.users, ['-winPoints', 'display_name', 'id']);
         };
 
         $scope.callSearch = function(users, user_id) {
@@ -100,7 +99,8 @@ angular.module('usersController', [])
             return false;
         }
 
-        $scope.select($scope.rooms[0]);
+        $scope.selector = $scope.rooms[0];
+        $scope.select();
     }])
 
     .controller('usersControllerAccountModalInstance', ["$scope", "$rootScope", "$modalInstance", "$cookies", "serviceUser", "user", function($scope, $rootScope, $modalInstance, $cookies, User, user) {
@@ -138,6 +138,14 @@ angular.module('usersController', [])
                 .success(function(data){
                     $rootScope.user.rooms.push(data);
                 });
+        };
+
+        $scope.leave = function(id){
+            if (confirm("Vous allez quitter le salon !")) {
+                Room.leave($cookies['token'], id)
+                    .success(function(data){
+                    });
+            }
         };
 
         $scope.cancel = function () {

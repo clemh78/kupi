@@ -29,6 +29,7 @@ Route::post('/api/users/join', array('before' => 'token', 'uses' => 'UserControl
 Route::get('/api/games/{id?}/bets', array('before' => 'token', 'uses' => 'GameController@getBets'));
 
 Route::post('/api/rooms/{id?}/user', array('before' => 'token', 'uses' => 'RoomController@updateDisplayName'));
+Route::delete('/api/rooms/{id?}/user', array('before' => 'token', 'uses' => 'RoomController@leave'));
 
 Route::get('/api/report/', array('before' => 'key', 'uses' => 'ReportController@index'));
 Route::post('/api/ws/existence', array('before' => 'key', 'uses' => 'WsController@channelExitence'));

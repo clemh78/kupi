@@ -228,10 +228,6 @@ angular.module('gamesController', [])
 
         $scope.selector = $scope.user.rooms[0];
 
-        $scope.select = function(roomUser){
-            $scope.selector = roomUser;
-        };
-
         $scope.callSearch = function(users, user_id) {
             return $filter('filter')(users, { id: user_id }, true)[0];
         };

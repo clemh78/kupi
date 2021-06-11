@@ -59,8 +59,9 @@ class RoomController extends BaseController {
             return Response::json(
                 array('success' => false,
                     'payload' => array(),
-                    'message' => 'Vous n\'êtes pas dans ce salon !'
-                ));
+                    'error' => 'Vous n\'êtes pas dans ce salon !'
+                ),
+                400);
         }
 
         $input = Input::all();
@@ -78,9 +79,43 @@ class RoomController extends BaseController {
             return Response::json(
                 array('success' => false,
                     'payload' => array(),
-                    'message' => 'Vous devez renseigner un nom d\'affichage !'
-                ));
+                    'error' => 'Vous devez renseigner un nom d\'affichage !'
+                ),
+                400);
         }
+
+    }
+
+    public function leave($id){
+        $user = User::getUserWithToken($_GET['token']);
+        $roomUser = RoomUser::whereRaw('user_id = ? && room_id = ?', array($user->id, $id))->first();
+        $count = RoomUser::whereRaw('user_id = ?', array($user->id))->count();
+
+        if($count <= 1){
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => 'Vous devez être dans au moins 1 salon !'
+                ),
+                400);
+        }
+
+        if(!$roomUser){
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => 'Vous n\'êtes pas dans ce salon !'
+                ),
+                400);
+        }
+
+        $roomUser->delete();
+
+        return Response::json(
+            array('success' => true,
+                'payload' => $roomUser,
+                'message' => 'Vous avez quitté le salon '.$roomUser->room->name
+            ));
 
     }
 

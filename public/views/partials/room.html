@@ -12,6 +12,7 @@
             </a>
             <h3>
                 @@roomUser.room.name@@
+                <button style="cursor: pointer;margin-left: 10px;margin-top: -5px;" class="btn" ng-click="leave(roomUser.room.id)" ><i class="fa fa-sign-out"></i></button>
             </h3>
             <ul class="list-group">
                 <li class="list-group-item">
@@ -23,15 +24,15 @@
                     <span class="hidden-sm hidden-md hidden-lg">Code</span>
                     <div class="code"><b>@@roomUser.room.code@@</b></div>
                 </li>
-                <li class="list-group-item" style="height: 60px;">
+                <li class="list-group-item" style="height: 80px;">
                     <div id="display_name_see_@@roomUser.id@@" class="display_name_see" ng-hide="editedRoom == roomUser.room.id" >
-                        <div style="padding-top: 10px;float: left;" >
+                        <div style="padding-top: 10px;float: left;width: 70%" >
                             <i>Les autres utilisateurs de ce salon vous voit en tant que "@@roomUser.display_name@@".</i>
                         </div>
                         <button style="float: right;cursor: pointer;" class="btn btn-default" ng-click="editDisplayName(roomUser)" >Modifier</button>
                     </div>
                     <div id="display_name_edit_@@roomUser.id@@" class="display_name_edit" ng-hide="editedRoom != roomUser.room.id" >
-                        <div style="float: left;" >
+                        <div style="float: left;width: 40%" >
                             <input type="text" ng-model="editedRoomName[roomUser.room.id]" class="form-control" />
                         </div>
                         <button style="float: right;cursor: pointer;margin-left: 10px;" class="btn btn-danger" ng-click="editDisplayName(undefined)" >Annuler</button>
