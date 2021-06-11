@@ -40,9 +40,14 @@
         </div>
     </div>
     <div class="modal-footer" style="border:none;">
-        <button class="btn btn-success" ng-hide="bet.id != null" ng-click="ok()">Parier</button>
-        <button class="btn btn-success" ng-hide="bet.id == null" ng-click="ok()">Modifier</button>
-        <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
+        <div style="width: 50%;float:left;" >
+            <b>Tips</b> : la possibilité de parier (ajout ou modification) sur un match se bloque 1 min avant le début du match. Nul besoin de faire tout les matchs maintenant :)
+        </div>
+        <div style="width: 50%;float:right;" >
+            <button class="btn btn-success" ng-hide="bet.id != null" ng-click="ok()">Parier</button>
+            <button class="btn btn-success" ng-hide="bet.id == null" ng-click="ok()">Modifier</button>
+            <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
+        </div>
     </div>
 
 </div>
