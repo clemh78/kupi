@@ -161,7 +161,7 @@ class live extends Command {
                         }
 
                         //match en cours
-                        if($oldStatus == "in_progress" && $value->status == "in_progress"){
+                        if($oldStatus == "in_progress" && $value->status == "in_progress" && $oldStatus == "suspended" && $value->status == "in_progress"){
                             $matchJson = (object) [
                                 "id" => $value->id,
                                 "time" => $value->time,
