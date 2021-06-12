@@ -13,7 +13,7 @@
 
 angular.module('gamesController', [])
 
-    .controller('gamesControllerList', ["$scope", "$rootScope", "$timeout", "$cookies", "$modal", "$filter", "games", "gamesPrevious", "bracket", "groups", "serviceGame", function($scope, $rootScope, $timeout, $cookies, $modal, $filter, games, gamesPrevious, bracket, groups, Game) {
+    .controller('gamesControllerList', ["$scope", "$rootScope", "$timeout", "$cookies", "$modal", "$filter", "games", "gamesPrevious", "bracket", "groups", "serviceGame", "serviceUser", function($scope, $rootScope, $timeout, $cookies, $modal, $filter, games, gamesPrevious, bracket, groups, Game, User) {
         $scope.games = games.data;
         $scope.gamesPrevious = gamesPrevious.data;
         $scope.groups = groups.data;
@@ -207,7 +207,10 @@ angular.module('gamesController', [])
             objectNew.winner = data.winner;
             objectNew.user_bet.win_points = data.user_bet_points;
 
-            $rootScope.user.winPoints = data.user_points;
+            User.getUser($cookies['user_id'], $cookies['token'])
+                .success(function(data) {
+                    $rootScope.user = data;
+                });
 
             $scope.$apply();
         });

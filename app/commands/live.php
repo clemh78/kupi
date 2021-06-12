@@ -174,19 +174,16 @@ class live extends Command {
                                 "team2_kick_at_goal" => $value->team2_kick_at_goal,
                                 "winner_id" => $value->winner_id,
                                 "winner" => $value->winner,
-                                "user_bet_points" => 0,
-                                "user_points" => 0
+                                "user_bet_points" => 0
                             ];
 
                             foreach($users as $user){
 
                                 $token = Token::whereRaw('user_id = ?', array($user->id))->first();
                                 $_GET['token'] = $token->id;
-                                $userBdd = User::getUserWithToken($_GET['token']);
 
                                 if($value->user_bet != null)
                                     $matchJson->user_bet_points = $value->user_bet->win_points;
-                                $matchJson->user_points = $userBdd->winPoints;
 
                                 $pusher->trigger('private-user-'.$user->id, 'finish', $matchJson);
                             }
