@@ -72,6 +72,12 @@ angular.module('usersController', [])
             return $filter('filter')(users, { id: user_id }, true)[0];
         };
 
+        $scope.updatedDateIsBeforeToday = function(date){
+            now = moment("today");
+
+            return now.isAfter(moment(date));
+        };
+
         $scope.showRank = function(index){
             if(index == 0)
                 return true;

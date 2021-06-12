@@ -21,6 +21,8 @@ class AddUserRoomStats extends Migration {
             $table->integer('points')->default(0);
             $table->integer('pointsDayMinus1')->default(0);
             $table->integer('pointsDayMinus2')->default(0);
+            $table->boolean('game_finished_today');
+            $table->timestamp('last_updated');
         });
 	}
 
@@ -40,6 +42,8 @@ class AddUserRoomStats extends Migration {
             $table->dropColumn('points');
             $table->dropColumn('pointsDayMinus1');
             $table->dropColumn('pointsDayMinus2');
+            $table->dropColumn('game_finished_today');
+            $table->dropColumn('last_updated');
         });
 	}
 

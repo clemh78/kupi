@@ -63,7 +63,9 @@ class Room extends Eloquent {
                 "rankDayMinus2" => $roomUser->rankDayMinus2,
                 "points" => $roomUser->points,
                 "pointsDayMinus1" => $roomUser->pointsDayMinus1,
-                "pointsDayMinus2" => $roomUser->pointsDayMinus2
+                "pointsDayMinus2" => $roomUser->pointsDayMinus2,
+                "game_finished_today" => $roomUser->game_finished_today,
+                "last_updated" => $roomUser->last_updated
             ];
         }
 
@@ -111,6 +113,8 @@ class Room extends Eloquent {
         $date = new DateTime("today");
         $dateMinus1 = clone $date;
         date_sub($dateMinus1, date_interval_create_from_date_string('1 days'));
+        $datePlus1 = clone $date;
+        date_add($datePlus1, date_interval_create_from_date_string('1 days'));
 
         $usersTmp = $this->roomUsers()->get();
         $usersTmp2 = array();
@@ -118,6 +122,8 @@ class Room extends Eloquent {
         $usersSortByWinPointsLastDay = array();
 
         $posUsersBeforeDay = array();
+
+        $games = Game::whereRaw('date < ? && date > ? && status = "completed"', array($datePlus1, $date))->get();
 
         foreach($usersTmp as $user){
             $user['pointsDayMinus1'] = $this->getWinPointsDay($user['user_id'], $dateMinus1, $date);
@@ -144,16 +150,20 @@ class Room extends Eloquent {
         $pos = 1;
         foreach($usersTmp2 as $user){
             $user['rankDayMinus2'] = $posUsersBeforeDay[$user['id']];
-            $user['rankDayMinus1'] = $pos++;
-            $users[] = $user;
+            $user['rank'] = $pos++;
             $usersSortByWinPointsLastDay[] = $user;
         }
 
         usort($usersSortByWinPointsLastDay, "Room::cmp3");
 
+
         $pos = 1;
+        foreach($usersSortByWinPointsLastDay as $user){
+            $user['rankDayMinus1'] = $pos++;
+            $users[] = $user;
+        }
+
         foreach($users as $user){
-            $user['rank'] = $pos++;
 
             $roomUser = RoomUser::whereRaw('user_id = ? && room_id = ?', array($user->user_id, $user->room_id))->first();
 
@@ -164,6 +174,8 @@ class Room extends Eloquent {
                 $roomUser->rankDayMinus1 = $user['rankDayMinus1'];
                 $roomUser->rankDayMinus2 = $user['rankDayMinus2'];
                 $roomUser->rank = $user['rank'];
+                $roomUser->last_updated = new DateTime("now");
+                $roomUser->game_finished_today = count($games) > 0;
                 $roomUser->save();
             }
         }

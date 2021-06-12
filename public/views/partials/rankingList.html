@@ -20,22 +20,19 @@
             </div>
             <div class="login" ng-class="{'me' : userR.id == user.id}" >@@ callSearch(selector.users, userR.id).display_name @@</div>
             <div class="points_group" >
-                <div class="indicator_position up" ng-show="userR.rankDayMinus1 < userR.rankDayMinus2" ><i class='fa fa-arrow-up'></i> +@@userR.rankDayMinus2-userR.rankDayMinus1@@</div>
-                <div class="indicator_position down" ng-show="userR.rankDayMinus1 >= userR.rankDayMinus2" ><i class='fa fa-arrow-down'></i> -@@userR.rankDayMinus1-userR.rankDayMinus2@@</div>
-                <div class="indicator_position equal" ng-show="userR.rankDayMinus1 == userR.rankDayMinus2" ><i class='fa fa-arrow-right'></i></div>
+                <div class="indicator_position up" ng-show="userR.rank < userR.rankDayMinus1 && !updatedDateIsBeforeToday(userR.last_updated) && userR.game_finished_today" ><i class='fa fa-arrow-up'></i> +@@userR.rankDayMinus1-userR.rank@@</div>
+                <div class="indicator_position down" ng-show="userR.rank > userR.rankDayMinus1 && !updatedDateIsBeforeToday(userR.last_updated) && userR.game_finished_today" ><i class='fa fa-arrow-down'></i> -@@userR.rank-userR.rankDayMinus1@@</div>
+                <div class="indicator_position equal" ng-show="userR.rank == userR.rankDayMinus1 && !updatedDateIsBeforeToday(userR.last_updated) && userR.game_finished_today" ><i class='fa fa-arrow-right'></i> =</div>
 
                 <div class="points" >@@ userR.points @@ XP</div>
             </div>
         </div><br />
 
-        <div class="user" >
-            <div class="points_group" >
-                <div class="indicator_position" >Diff. de place (depuis hier matin)</div>
-
-                <div class="points" >XP maintenant</div>
-            </div>
-            <p style="clear:both" ></p>
+        <div style="text-align: right;float: right;font-style: italic;">
+            Les positions et l'XP sont mis à jour après chaque match.<br />
+            L'évolution représente le nombre de places gagnées/perdues aujourd'hui.
         </div>
+        <p style="clear: both;" ></p>
     </div>
 </div>
 
