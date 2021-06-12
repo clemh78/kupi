@@ -603,8 +603,8 @@ ul.nav.nav-pills li.active a{
 
 .users .modal-body .user .position {
     font-size: 20px;
-    background-color: #F7A600;
-    color: #333;
+    background-color: #009bb4;
+    color: white;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -617,7 +617,7 @@ ul.nav.nav-pills li.active a{
 .users .modal-body .user .position.empty {
     float:left;
     background-color: transparent;
-    border-right: 5px solid #F7A600;
+    border-right: 5px solid #009bb4;
     height: 40px;
 }
 
@@ -643,7 +643,6 @@ ul.nav.nav-pills li.active a{
 
 .users .modal-body .user .login.me {
     background-color: #F7A600;
-    color: #333;
 }
 
 .users .modal-body .user .points {
@@ -658,7 +657,6 @@ ul.nav.nav-pills li.active a{
 .users .modal-body .user .points.live {
     background-color: #F7A600;
     margin-right: 10px;
-    color: #333;
 }
 
 .users .modal-body .user .indicator_position {

@@ -24,15 +24,16 @@
                 <div class="indicator_position down" ng-show="userR.rankDayMinus1 >= userR.rankDayMinus2" ><i class='fa fa-arrow-down'></i> -@@userR.rankDayMinus1-userR.rankDayMinus2@@</div>
                 <div class="indicator_position equal" ng-show="userR.rankDayMinus1 == userR.rankDayMinus2" ><i class='fa fa-arrow-right'></i></div>
 
-                <div class="points" >@@ userR.pointsDayMinus1 @@ XP</div>
+                <div class="points" >@@ userR.points @@ XP</div>
             </div>
-
-            <div class="points live" >@@ userR.points @@ XP</div>
         </div><br />
 
         <div class="user" >
-            <div class="points" >Journée d'hier</div>
-            <div class="points live" >Points en live</div>
+            <div class="points_group" >
+                <div class="indicator_position" >Diff. de place (depuis hier matin)</div>
+
+                <div class="points" >XP maintenant</div>
+            </div>
             <p style="clear:both" ></p>
         </div>
     </div>
