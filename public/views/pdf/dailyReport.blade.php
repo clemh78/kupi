@@ -147,13 +147,13 @@
             <span class="date">{{date_format($date, 'd/m/Y')}}</span>
 
             @if(isset($users[0]))
-                <span class="first"><b>{{$users[0]['firstname']}} {{$users[0]['lastname']}}.</b><br/> {{$users[0]['winPoints']}}XP</span>
+                <span class="first"><b>{{$users[0]['display_name']}}</b><br/> {{$users[0]['points']}}XP</span>
             @endif
             @if(isset($users[1]))
-                <span class="second"><b>{{$users[1]['firstname']}} {{$users[1]['lastname']}}.</b><br/> {{$users[1]['winPoints']}}XP</span>
+                <span class="second"><b>{{$users[1]['display_name']}}</b><br/> {{$users[1]['points']}}XP</span>
             @endif
             @if(isset($users[2]))
-                <span class="third"><b>{{$users[2]['firstname']}} {{$users[2]['lastname']}}.</b><br/> {{$users[2]['winPoints']}}XP</span>
+                <span class="third"><b>{{$users[2]['display_name']}}</b><br/> {{$users[2]['points']}}XP</span>
             @endif
         </div>
         <div class="row games">
@@ -164,9 +164,9 @@
                         <div class="card col-5  ml-1" >
                             <div class="card-body">
                                 <div class="row">
-                                    <img src="/images/flags/{{strtolower($games[0]['team1']['code'])}}" class="flag">
+                                    <img src="/images/flags/{{strtoupper($games[0]['team1']['code'])}}.webp" class="flag">
                                     <div class="col-4 score">{{$games[0]['team1_points']}} - {{$games[0]['team2_points']}}</div>
-                                    <img src="/images/flags/{{strtolower($games[0]['team2']['code'])}}" class="flag">
+                                    <img src="/images/flags/{{strtoupper($games[0]['team2']['code'])}}.webp" class="flag">
                                 </div>
                                 <div class="row">
                                     <div class="col-6">{{$games[0]['team1']['name']}}</div>
@@ -180,9 +180,9 @@
                         <div class="card col-5  ml-1" >
                             <div class="card-body">
                                 <div class="row">
-                                    <img src="/images/flags/{{strtolower($games[1]['team1']['code'])}}" class="flag">
+                                    <img src="/images/flags/{{strtoupper($games[1]['team1']['code'])}}.webp" class="flag">
                                     <div class="col-4 score">{{$games[1]['team1_points']}} - {{$games[1]['team2_points']}}</div>
-                                    <img src="/images/flags/{{strtolower($games[1]['team2']['code'])}}" class="flag">
+                                    <img src="/images/flags/{{strtoupper($games[1]['team2']['code'])}}.webp" class="flag">
                                 </div>
                                 <div class="row">
                                     <div class="col-6">{{$games[1]['team1']['name']}}</div>
@@ -200,9 +200,9 @@
                         <div class="card col-5  ml-1" >
                             <div class="card-body">
                                 <div class="row">
-                                    <img src="/images/flags/{{strtolower($games[2]['team1']['code'])}}" class="flag">
+                                    <img src="/images/flags/{{strtoupper($games[2]['team1']['code'])}}.webp" class="flag">
                                     <div class="col-4 score">{{$games[2]['team1_points']}} - {{$games[2]['team2_points']}}</div>
-                                    <img src="/images/flags/{{strtolower($games[2]['team2']['code'])}}" class="flag">
+                                    <img src="/images/flags/{{strtoupper($games[2]['team2']['code'])}}.webp" class="flag">
                                 </div>
                                 <div class="row">
                                     <div class="col-6">{{$games[2]['team1']['name']}}</div>
@@ -216,9 +216,9 @@
                         <div class="card col-5  ml-1" >
                             <div class="card-body">
                                 <div class="row">
-                                    <img src="/images/flags/{{strtolower($games[3]['team1']['code'])}}" class="flag">
+                                    <img src="/images/flags/{{strtoupper($games[3]['team1']['code'])}}.webp" class="flag">
                                     <div class="col-4 score">{{$games[3]['team1_points']}} - {{$games[3]['team2_points']}}</div>
-                                    <img src="/images/flags/{{strtolower($games[3]['team2']['code'])}}" class="flag">
+                                    <img src="/images/flags/{{strtoupper($games[3]['team2']['code'])}}.webp" class="flag">
                                 </div>
                                 <div class="row">
                                     <div class="col-6">{{$games[3]['team1']['name']}}</div>
@@ -235,18 +235,18 @@
         </div>
     </div>
     @if(isset($users[0]))
-        <span class="first"><b>{{$users[0]['firstname']}} {{$users[0]['lastname']}}.</b><br/> {{$users[0]['winPoints']}}XP</span>
+        <span class="first"><b>{{$users[0]['display_name']}}</b><br/> {{$users[0]['points']}}XP</span>
     @endif
 
     <div class="mvp">
         @if(isset($MVP[0]))
-            <div class="first"> {{$MVP[0]['firstname']}} {{$MVP[0]['lastname']}}. <br><span>+{{$MVP[0]['winPointsLastDay']}}XP</span></div>
+            <div class="first"> {{$MVP[0]['display_name']}}<br><span>+{{$MVP[0]['winPointsLastDay']}}XP</span></div>
         @endif
 
         <div class="second">
             @for ($i = 1; $i < 5; $i++)
                 @if(isset($MVP[$i]))
-                    #{{$i+1}} {{$MVP[$i]['firstname']}} {{$MVP[$i]['lastname']}}. <span>+{{$MVP[$i]['winPointsLastDay']}}XP</span><br />
+                    #{{$i+1}} {{$MVP[$i]['display_name']}}<span>+{{$MVP[$i]['winPointsLastDay']}}XP</span><br />
                 @endif
             @endfor
         </div>
@@ -259,7 +259,7 @@
                 <ul>
                     @for ($i = 0; $i < 10; $i++)
                         @if(isset($users[$i]))
-                            <li @if($i == 0)style="font-size: 2em"@endif @if($i == 1)style="font-size: 1.6em"@endif @if($i == 2)style="font-size: 1.3em"@endif ><span class="rank" >#{{$i+1}}</span> @if($users[$i]['diffPlace']>0)<img src="/images/report/up.jpg">@endif @if($users[$i]['diffPlace']<0)<img src="/images/report/down.jpg">@endif {{$users[$i]['firstname']}} {{$users[$i]['lastname']}}. <span class="evolution">{{$users[$i]['winPoints']}}XP {{($users[$i]['winPointsLastDay'] > 0)?'+'.$users[$i]['winPointsLastDay'].'PX':''}}</span></li>
+                            <li @if($i == 0)style="font-size: 2em"@endif @if($i == 1)style="font-size: 1.6em"@endif @if($i == 2)style="font-size: 1.3em"@endif ><span class="rank" >#{{$i+1}}</span> @if($users[$i]['diffPlace']>0)<img src="/images/report/up.jpg">@endif @if($users[$i]['diffPlace']<0)<img src="/images/report/down.jpg">@endif {{$users[$i]['login']}}<span class="evolution">{{$users[$i]['winPoints']}}XP {{($users[$i]['winPointsLastDay'] > 0)?'+'.$users[$i]['winPointsLastDay'].'PX':''}}</span></li>
                         @endif
                     @endfor
                 </ul>
@@ -270,7 +270,7 @@
                     <ul>
                         @for ($i = 10; $i <= 20; $i++)
                             @if(isset($users[$i]))
-                                <li><span class="rank" >#{{$i+1}}</span> @if($users[$i]['diffPlace']>0)<img src="/images/report/up.jpg">@endif @if($users[$i]['diffPlace']<0)<img src="/images/report/down.jpg">@endif {{$users[$i]['firstname']}} {{$users[$i]['lastname']}}. <span class="evolution">{{$users[$i]['winPoints']}}XP {{($users[$i]['winPointsLastDay'] > 0)?'+'.$users[$i]['winPointsLastDay'].'PX':''}}</span></li>
+                                <li><span class="rank" >#{{$i+1}}</span> @if($users[$i]['diffPlace']>0)<img src="/images/report/up.jpg">@endif @if($users[$i]['diffPlace']<0)<img src="/images/report/down.jpg">@endif {{$users[$i]['login']}}<span class="evolution">{{$users[$i]['winPoints']}}XP {{($users[$i]['winPointsLastDay'] > 0)?'+'.$users[$i]['winPointsLastDay'].'PX':''}}</span></li>
                             @endif
                         @endfor
                     </ul>
@@ -282,7 +282,7 @@
                     <ul>
                         @for ($i = 21; $i <= 31; $i++)
                             @if(isset($users[$i]))
-                                <li><span class="rank" >#{{$i+1}}</span> @if($users[$i]['diffPlace']>0)<img src="/images/report/up.jpg">@endif @if($users[$i]['diffPlace']<0)<img src="/images/report/down.jpg">@endif {{$users[$i]['firstname']}} {{$users[$i]['lastname']}}. <span class="evolution">{{$users[$i]['winPoints']}}XP {{($users[$i]['winPointsLastDay'] > 0)?'+'.$users[$i]['winPointsLastDay'].'PX':''}}</span></li>
+                                <li><span class="rank" >#{{$i+1}}</span> @if($users[$i]['diffPlace']>0)<img src="/images/report/up.jpg">@endif @if($users[$i]['diffPlace']<0)<img src="/images/report/down.jpg">@endif {{$users[$i]['login']}}<span class="evolution">{{$users[$i]['winPoints']}}XP {{($users[$i]['winPointsLastDay'] > 0)?'+'.$users[$i]['winPointsLastDay'].'PX':''}}</span></li>
                             @endif
                         @endfor
                     </ul>

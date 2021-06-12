@@ -90,6 +90,7 @@ class RoomController extends BaseController {
         $user = User::getUserWithToken($_GET['token']);
         $roomUser = RoomUser::whereRaw('user_id = ? && room_id = ?', array($user->id, $id))->first();
         $count = RoomUser::whereRaw('user_id = ?', array($user->id))->count();
+        $room = $roomUser->room;
 
         if($count <= 1){
             return Response::json(
@@ -110,6 +111,8 @@ class RoomController extends BaseController {
         }
 
         $roomUser->delete();
+
+        $room->refreshRoomStats();
 
         return Response::json(
             array('success' => true,

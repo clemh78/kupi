@@ -15,11 +15,25 @@
             <div class="position" ng-show="showRank($index)" >
                 #@@ userR.rank @@
             </div>
-            <div class="position" style="background-color: transparent;border-right: 5px solid #009bb4;height: 16px;" ng-show="!showRank($index)" >
+            <div class="position empty" ng-show="!showRank($index)" >
 
             </div>
-            <span class="points" >@@ callSearch(selector.users, userR.id).winPoints @@ XP</span>
-            <span class="login" ng-class="{'me' : userR.id == user.id}" >@@ callSearch(selector.users, userR.id).display_name @@</span>
+            <div class="login" ng-class="{'me' : userR.id == user.id}" >@@ callSearch(selector.users, userR.id).display_name @@</div>
+            <div class="points_group" >
+                <div class="indicator_position up" ng-show="userR.rankDayMinus1 < userR.rankDayMinus2" ><i class='fa fa-arrow-up'></i> +@@userR.rankDayMinus2-userR.rankDayMinus1@@</div>
+                <div class="indicator_position down" ng-show="userR.rankDayMinus1 >= userR.rankDayMinus2" ><i class='fa fa-arrow-down'></i> -@@userR.rankDayMinus1-userR.rankDayMinus2@@</div>
+                <div class="indicator_position equal" ng-show="userR.rankDayMinus1 == userR.rankDayMinus2" ><i class='fa fa-arrow-right'></i></div>
+
+                <div class="points" >@@ userR.pointsDayMinus1 @@ XP</div>
+            </div>
+
+            <div class="points live" >@@ userR.points @@ XP</div>
+        </div><br />
+
+        <div class="user" >
+            <div class="points" >Journée d'hier</div>
+            <div class="points live" >Points en live</div>
+            <p style="clear:both" ></p>
         </div>
     </div>
 </div>

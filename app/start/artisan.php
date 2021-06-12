@@ -14,3 +14,4 @@
 Artisan::add(new live);
 Artisan::add(new setWinnersOfGroup);
 Artisan::add(new refreshGroupsStats);
+Artisan::add(new refreshRoomStats());

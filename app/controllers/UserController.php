@@ -214,6 +214,8 @@ class UserController extends BaseController {
         $userRoom = RoomUser::create(["user_id" => $user->id, "room_id" => $room->id, "display_name" => $user->login]);
         $userRoom->save();
 
+        $room->refreshRoomStats();
+
         $user = User::getUserWithToken($_GET['token']);
         return Response::json(
             array('success' => true,

@@ -4,21 +4,21 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class refreshGroupsStats extends Command {
+class refreshRoomStats extends Command {
 
 	/**
 	 * The console command name.
 	 *
 	 * @var string
 	 */
-    protected $name = 'wc:refreshGroupsStats';
+	protected $name = 'wc:refreshRoomStats';
 
 	/**
 	 * The console command description.
 	 *
 	 * @var string
 	 */
-	protected $description = 'Permet de recalculer l\'ensemble des stats concernant les équipes.';
+	protected $description = 'Permet de recalculer l\'ensemble des stats concernant les salons.';
 
 	/**
 	 * Create a new command instance.
@@ -37,11 +37,11 @@ class refreshGroupsStats extends Command {
 	 */
 	public function fire()
 	{
-        $teams = Team::get();
+        $rooms = Room::get();
 
-        foreach($teams as $team){
-            $this->info('MAJ stats de l\'équipe '.$team->name);
-            $team->refreshTeamStats();
+        foreach($rooms as $room) {
+            $this->info('MAJ stats du salon  '.$room->name);
+            $room->refreshRoomStats();
         }
 	}
 
@@ -52,7 +52,8 @@ class refreshGroupsStats extends Command {
 	 */
 	protected function getArguments()
 	{
-		return array();
+		return array(
+		);
 	}
 
 	/**
@@ -62,7 +63,8 @@ class refreshGroupsStats extends Command {
 	 */
 	protected function getOptions()
 	{
-		return array();
+		return array(
+		);
 	}
 
 }

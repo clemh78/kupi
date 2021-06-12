@@ -59,32 +59,13 @@ angular.module('usersController', [])
             $scope.roomsTmp.push(angular.copy(roomUser.room));
         });
 
-        //TRIE + gestion des ex æquo
-        angular.forEach($scope.roomsTmp, function(room, key) {
-            if(room != undefined){
-                users = $filter('orderBy')(room.users, ['-winPoints', 'display_name', 'id']);
-
-                index = 1;
-                rank = null;
-                lastScore = null;
-                angular.forEach(users, function(user, key) {
-                    if(lastScore != user.winPoints)
-                        rank = index;
-                    user.rank = rank;
-
-                    index++;
-                    lastScore = user.winPoints;
-                });
-            }
-        });
-
         angular.forEach($scope.roomsTmp, function(room, key) {
             if(room != undefined)
                 $scope.rooms.push(room);
         });
 
         $scope.select = function(){
-            $scope.usersSelect = $filter('orderBy')($scope.selector.users, ['-winPoints', 'display_name', 'id']);
+            $scope.usersSelect = $filter('orderBy')($scope.selector.users, ['rank']);
         };
 
         $scope.callSearch = function(users, user_id) {
@@ -94,7 +75,7 @@ angular.module('usersController', [])
         $scope.showRank = function(index){
             if(index == 0)
                 return true;
-            if($scope.usersSelect[index-1].rank != $scope.usersSelect[index].rank)
+            if($scope.usersSelect[index-1].points != $scope.usersSelect[index].points)
                 return true;
             return false;
         }

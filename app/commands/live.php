@@ -117,6 +117,22 @@ class live extends Command {
                                     $this->info('[' . $date->format('Y-m-d H:i:s') . '] Match fini : match nul.');
                                 }
                             }
+
+                            //Différents refresh
+
+                            $rooms = Room::get();
+
+                            foreach($rooms as $room) {
+                                $this->info('MAJ stats du salon  '.$room->name);
+                                $room->refreshRoomStats();
+                            }
+
+                            $teams = Team::get();
+
+                            foreach($teams as $team){
+                                $this->info('MAJ stats de l\'équipe '.$team->name);
+                                $team->refreshTeamStats();
+                            }
                         }
                         $value->save();
 
