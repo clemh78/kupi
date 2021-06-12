@@ -357,7 +357,7 @@ ul.nav.nav-pills li.active a{
     background-color: rgb(245, 245, 245);
 }
 
-.game.inprogress .game-content {
+.game.inprogress .game-content, .game.suspended .game-content {
     background: #009bb4 url(../images/body-bg-dark.webp);
     color: white;
     border-color: #777777;

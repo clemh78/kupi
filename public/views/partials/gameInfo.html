@@ -18,9 +18,10 @@
                     <h5 ng-show="game.status=='completed'" >@@game.date | amDateFormat:'DD/MM à HH:mm'@@</h5>
 
                     <h5 ng-show="game.status=='in_progress'">En cours</h5>
+                    <h5 ng-show="game.status=='suspended'">Match interrompu</h5>
 
-                    <span class="minute label label-primary" ng-show="game.status=='in_progress' && game.time != 'half-time' && game.time != 'full-time'" ><span class="point" >•</span> @@ game.time @@</span>
-                    <span class="minute label label-primary" ng-show="game.status=='in_progress' && game.time == 'half-time' && game.time != 'full-time'" >MI-TEMPS</span>
+                    <span class="minute label label-primary" ng-show="game.status=='in_progress' && game.time != 'half-time' && game.time != 'full-time' && game.status != 'suspended'" ><span class="point" >•</span> @@ game.time @@</span>
+                    <span class="minute label label-primary" ng-show="game.status=='in_progress' && game.time == 'half-time' && game.time != 'full-time' && game.status != 'suspended'" >MI-TEMPS</span>
                 </div>
                 <div class="col-xs-4  text-center">
                     <div class="team2">

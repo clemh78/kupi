@@ -57,7 +57,7 @@ class live extends Command {
             $users = json_decode($response['body'])->users;
 
             $date = new DateTime();
-            $games = Game::whereRaw('date < ? && status != "completed"', array(new DateTime()))->get();
+            $games = Game::whereRaw('date < ? && status != "completed" && status != "canceled" && status != "suspended"', array(new DateTime()))->get();
             if(count($games) > 0){
                 foreach($games as $value){
                     $oldStatus = $value->status;
@@ -84,6 +84,18 @@ class live extends Command {
                             if($match->phase == "HALF_TIME_BREAK")
                                 $value->time = "half-time";
                             $this->info('[' . $date->format('Y-m-d H:i:s') . '] MAJ scores : ' . $value->team1()->first()->name . ' ' . $value->team1_points . '-' . $value->team2_points . ' ' . $value->team2()->first()->name . ' ('.$value->time.').');
+                        }
+                        if ($match->status == "SUSPENDED") {
+                            $value->status = "suspended";
+
+                            $value->team1_points = $match->score->total->home;
+                            $value->team2_points = $match->score->total->away;
+                            if ($value->kick_at_goal == 1) {
+                                $value->team1_kick_at_goal = $match->score->penalty->home;
+                                $value->team2_kick_at_goal = $match->score->penalty->away;
+                            }
+
+                            $this->info('[' . $date->format('Y-m-d H:i:s') . '] MAJ scores : ' . $value->team1()->first()->name . ' ' . $value->team1_points . '-' . $value->team2_points . ' ' . $value->team2()->first()->name . ' (Interrompu).');
                         }
                         //Si match terminé, on fige les infos et on distribue les points
                         if ($match->status == "FINISHED") {
@@ -161,6 +173,20 @@ class live extends Command {
 
                             foreach($users as $user){
                                 $pusher->trigger('private-user-'.$user->id, 'progress', $matchJson);
+                            }
+                        }
+
+                        if($value->status == "suspended"){
+                            $matchJson = (object) [
+                                "id" => $value->id,
+                                "team1_points" => $value->team1_points,
+                                "team2_points" => $value->team2_points,
+                                "team1_kick_at_goal" => $value->team1_kick_at_goal,
+                                "team2_kick_at_goal" => $value->team2_kick_at_goal,
+                            ];
+
+                            foreach($users as $user){
+                                $pusher->trigger('private-user-'.$user->id, 'suspended', $matchJson);
                             }
                         }
 

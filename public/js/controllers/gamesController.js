@@ -187,6 +187,21 @@ angular.module('gamesController', [])
             $scope.$apply();
         });
 
+        channel.bind('suspended', function(data) {
+
+            object = $filter('filter')($scope.games, { id: parseInt(data.id) }, true)[0];
+
+            object.status = "suspended";
+            object.time = "";
+
+            object.team1_points = data.team1_points;
+            object.team2_points = data.team2_points;
+            object.team1_kick_at_goal = data.team1_kick_at_goal;
+            object.team2_kick_at_goal = data.team2_kick_at_goal;
+
+            $scope.$apply();
+        });
+
 
         channel.bind('finish', function(data) {
 
