@@ -18,11 +18,11 @@
             <div class="position empty" ng-show="!showRank($index)" >
 
             </div>
-            <div class="login" ng-class="{'me' : userR.id == user.id}" >@@ callSearch(selector.users, userR.id).display_name @@</div>
+            <div class="login" ng-class="{'me' : userR.id == user.id}" >@@ userR.display_name @@</div>
             <div class="points_group" >
-                <div class="indicator_position up" ng-show="userR.rank < userR.rankDayMinus1 && !updatedDateIsBeforeToday(userR.last_updated) && userR.game_finished_today" ><i class='fa fa-arrow-up'></i> +@@userR.rankDayMinus1-userR.rank@@</div>
-                <div class="indicator_position down" ng-show="userR.rank > userR.rankDayMinus1 && !updatedDateIsBeforeToday(userR.last_updated) && userR.game_finished_today" ><i class='fa fa-arrow-down'></i> -@@userR.rank-userR.rankDayMinus1@@</div>
-                <div class="indicator_position equal" ng-show="userR.rank == userR.rankDayMinus1 && !updatedDateIsBeforeToday(userR.last_updated) && userR.game_finished_today" ><i class='fa fa-arrow-right'></i> =</div>
+                <div class="indicator_position up" ng-show="userR.rank < userR.rankDayMinus1" ><i class='fa fa-arrow-up'></i> +@@userR.rankDayMinus1-userR.rank@@</div>
+                <div class="indicator_position down" ng-show="userR.rank > userR.rankDayMinus1" ><i class='fa fa-arrow-down'></i> -@@userR.rank-userR.rankDayMinus1@@</div>
+                <div class="indicator_position equal" ng-show="userR.rank == userR.rankDayMinus1" ><i class='fa fa-arrow-right'></i> =</div>
 
                 <div class="points" >@@ userR.points @@ XP</div>
             </div>
@@ -30,7 +30,7 @@
 
         <div style="text-align: right;float: right;font-style: italic;">
             Les positions et l'XP sont mis à jour après chaque match.<br />
-            L'évolution représente le nombre de places gagnées/perdues aujourd'hui.
+            L'évolution représente le nombre de places gagnées/perdues aujourd'hui (réinitialisé au premier match de la journée).
         </div>
         <p style="clear: both;" ></p>
     </div>
