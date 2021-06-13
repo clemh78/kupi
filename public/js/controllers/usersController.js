@@ -108,7 +108,7 @@ angular.module('usersController', [])
         };
     }])
 
-    .controller('usersControllerRoomModalInstance', ["$scope", "$rootScope", "$modalInstance", "$cookies", "serviceUser", "user", "serviceRoom", function($scope, $rootScope, $modalInstance, $cookies, User, user, Room) {
+    .controller('usersControllerRoomModalInstance', ["$scope", "$rootScope", "$modalInstance", "$cookies", "$filter", "serviceUser", "user", "serviceRoom", function($scope, $rootScope, $modalInstance, $cookies, $filter, User, user, Room) {
         $scope.user = user;
         $scope.editedRoomName = [];
 
@@ -131,6 +131,8 @@ angular.module('usersController', [])
             if (confirm("Vous allez quitter le salon !")) {
                 Room.leave($cookies['token'], id)
                     .success(function(data){
+                        object = $filter('filter')($scope.user.rooms, { room_id: parseInt(data.id) }, true)[0];
+                        $scope.user.rooms.splice($scope.user.rooms.indexOf(object), 1);
                     });
             }
         };
