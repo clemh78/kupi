@@ -98,8 +98,6 @@ class Room extends Eloquent {
 
     public function refreshRoomStats(){
         $date = new DateTime("today");
-        $dateMinus1 = clone $date;
-        date_sub($dateMinus1, date_interval_create_from_date_string('1 days'));
         $datePlus1 = clone $date;
         date_add($datePlus1, date_interval_create_from_date_string('1 days'));
 
@@ -113,13 +111,12 @@ class Room extends Eloquent {
         if(count($games) == 0){
             //Si aucun match aujourd'hui, on calcul le classement d'hier
             date_sub($date, date_interval_create_from_date_string('1 days'));
-            date_sub($dateMinus1, date_interval_create_from_date_string('1 days'));
             date_sub($datePlus1, date_interval_create_from_date_string('1 days'));
         }
 
 
         foreach($usersTmp as $user){
-            $user['pointsDayMinus1'] = $this->getWinPointsDay($user['user_id'], $dateMinus1, $date);
+            $user['pointsDayMinus1'] = $this->getWinPointsDay($user['user_id'], $date);
             $user['points'] = $user->user->winPoints;
 
             foreach($user["user"]["rooms"] as $roomTmp){
@@ -161,11 +158,11 @@ class Room extends Eloquent {
         }
     }
 
-    public function getWinPointsDay($user_id, $dateStart, $startEnd)
+    public function getWinPointsDay($user_id, $startEnd)
     {
 
-        $total = DB::table('transaction')->where('user_id', '=', $user_id)->where('created_at', '<', $startEnd)->where('created_at', '>', $dateStart)->where(function($req){$req->where('type', '=', 'gain')->orWhere('type', '=', 'bonus');})->sum('value');
-        $total = $total - DB::table('transaction')->where('created_at', '<', $startEnd)->where('created_at', '>', $dateStart)->where('user_id', '=', $user_id)->where(function($req){$req->where('type', '=', 'bet');})->sum('value');
+        $total = DB::table('transaction')->where('user_id', '=', $user_id)->where('created_at', '<', $startEnd)->where(function($req){$req->where('type', '=', 'gain')->orWhere('type', '=', 'bonus');})->sum('value');
+        $total = $total - DB::table('transaction')->where('created_at', '<', $startEnd)->where('user_id', '=', $user_id)->where(function($req){$req->where('type', '=', 'bet');})->sum('value');
 
         return $total;
     }
