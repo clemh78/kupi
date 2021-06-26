@@ -71,7 +71,7 @@ class live extends Command {
                             //Dans tous les cas : MAJ du score
                             $value->team1_points = $match->score->total->home;
                             $value->team2_points = $match->score->total->away;
-                            if ($value->kick_at_goal == 1) {
+                            if ($value->kick_at_goal == 1 && property_exists($$match->score, "penalty")) {
                                 $value->team1_kick_at_goal = $match->score->penalty->home;
                                 $value->team2_kick_at_goal = $match->score->penalty->away;
                             }
@@ -90,7 +90,7 @@ class live extends Command {
 
                             $value->team1_points = $match->score->total->home;
                             $value->team2_points = $match->score->total->away;
-                            if ($value->kick_at_goal == 1) {
+                            if ($value->kick_at_goal == 1 && property_exists($$match->score, "penalty")) {
                                 $value->team1_kick_at_goal = $match->score->penalty->home;
                                 $value->team2_kick_at_goal = $match->score->penalty->away;
                             }
@@ -103,7 +103,7 @@ class live extends Command {
 
                             $value->team1_points = $match->score->total->home;
                             $value->team2_points = $match->score->total->away;
-                            if ($value->kick_at_goal == 1) {
+                            if ($value->kick_at_goal == 1 && property_exists($$match->score, "penalty")) {
                                 $value->team1_kick_at_goal = $match->score->penalty->home;
                                 $value->team2_kick_at_goal = $match->score->penalty->away;
                             }
