@@ -215,7 +215,7 @@ class Game extends Eloquent {
 
         //On inscrit l'équipe gagnante dans son prochain match
 
-        if($this->stage_id != null) {
+        if($this->stage_id != null && $this->stage()->first()->next_stage != null) {
             $id = $this->stage()->first()->next_stage()->first()->id;
             $num_game = round($this->stage_game_num / 2);
 
